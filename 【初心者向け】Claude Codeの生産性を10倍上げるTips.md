@@ -1,4 +1,4 @@
-# 【初学者向け】 今すぐできる！ Claude Codeの生産性を10倍上げるTips
+# 初学者でも今すぐできる、Claude Codeの生産性を10倍にするTips
 
 Oikon
 
@@ -149,7 +149,6 @@ settings.json (settings.local.json):
 
 注意：必ず守ってくれるという過信は厳禁。`rm -fr`はすり抜ける報告もあり。
 
-settings.json (settings.local.json):
 ```json
 {
   "permissions": {
@@ -183,6 +182,7 @@ settings.json (settings.local.json):
   },
 }
 ```
+(引用元: <https://zenn.dev/watany/articles/df6f3b0d3af825>)
 
 (ref)
 <https://izanami.dev/post/d6f25eec-71aa-4746-8c0d-80c67a1459be>
@@ -236,6 +236,8 @@ Claude Codeのアクションを検知して、事前に決められた動作を
 - 拡張性の向上
 
 すぐ導入できる例：
+
+**タスク終了時に音を鳴らしてくれる**
 
 ```sh
 afplay /System/Library/Sounds/Sosumi.aiff
