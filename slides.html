@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【初学者向け】 今すぐできる！ Claude Codeの生産性を10倍上げるTips</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'YuGothic', 'Meiryo', sans-serif;
+            background-color: #fbf6f2;
+            color: #000000;
+            overflow: hidden;
+        }
+
+        .presentation {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .slide {
+            width: min(90vw, 1200px);
+            height: min(90vh, 675px);
+            background-color: #fbf6f2;
+            padding: 40px;
+            display: none;
+            flex-direction: column;
+            position: relative;
+            border: 2px solid #d4a37f;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        .slide.title-slide {
+            text-align: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #fbf6f2 0%, #ead1bf 100%);
+        }
+
+        .slide.title-slide h1 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: bold;
+            color: #d4a37f;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+
+        .slide.title-slide .subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: #d8ac8c;
+            margin-bottom: 1rem;
+        }
+
+        .slide.title-slide .author {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            color: #000000;
+            margin-bottom: 0.5rem;
+        }
+
+        .slide.title-slide .date {
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            color: #666;
+        }
+
+        .slide h2 {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: bold;
+            color: #d4a37f;
+            margin-bottom: 2rem;
+            text-align: center;
+            border-bottom: 3px solid #d8ac8c;
+            padding-bottom: 1rem;
+            position: sticky;
+            top: 0;
+            background-color: #fbf6f2;
+            z-index: 100;
+        }
+
+        .slide h3 {
+            font-size: clamp(1.3rem, 3vw, 2rem);
+            font-weight: bold;
+            color: #d8ac8c;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        .slide p, .slide li {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            color: #000000;
+        }
+
+        .slide ul {
+            margin-left: 2rem;
+        }
+
+        .slide li {
+            margin-bottom: 0.8rem;
+        }
+
+        .slide img {
+            max-width: 100%;
+            max-height: 400px;
+            margin: 1rem auto;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .slide .small-img {
+            max-width: 300px;
+            max-height: 200px;
+        }
+
+        .slide .code-block {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin: 1rem 0;
+            overflow-x: auto;
+            border-left: 4px solid #d4a37f;
+            white-space: pre;
+        }
+
+        .slide .code-block .json-key {
+            color: #9ca3af;
+        }
+
+        .slide .code-block .json-string {
+            color: #fbbf24;
+        }
+
+        .slide .code-block .json-bracket {
+            color: #60a5fa;
+        }
+
+        .slide .code-block .json-punctuation {
+            color: #e5e7eb;
+        }
+
+        .slide table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 1.3rem;
+        }
+
+        .slide th, .slide td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #d8ac8c;
+        }
+
+        .slide th {
+            background-color: #ead1bf;
+            color: #000000;
+            font-weight: bold;
+        }
+
+        .slide tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+
+        .slide-counter {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: rgba(212, 163, 127, 0.8);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 1rem;
+            z-index: 1000;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+            margin-top: 100px;
+            padding-bottom: 50px;
+        }
+
+        .content-single {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 100px;
+            padding-bottom: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                margin-top: 80px;
+                padding-bottom: 30px;
+            }
+            
+            .content-single {
+                margin-top: 80px;
+                padding-bottom: 30px;
+            }
+        }
+
+        .highlight {
+            background-color: #ead1bf;
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid #d4a37f;
+        }
+
+        .center-content {
+            text-align: center;
+        }
+
+        .reference-text {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .slide-references {
+            position: absolute;
+            bottom: 20px;
+            left: 80px;
+            right: 80px;
+            font-size: 0.9rem;
+            color: #666;
+            text-align: center;
+            border-top: 1px solid #d8ac8c;
+            padding-top: 10px;
+        }
+
+        .slide-references a {
+            color: #d4a37f;
+            text-decoration: none;
+        }
+
+        .slide-references a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- タイトルスライド -->
+        <div class="slide title-slide active">
+            <h1>【初学者向け】 今すぐできる！<br>Claude Codeの生産性を10倍上げるTips</h1>
+            <div class="subtitle">Claude Code 初学者 勉強会 2</div>
+            <div class="author">Oikon</div>
+            <div class="date">2025/07/05</div>
+        </div>
+
+        <!-- Who are you? -->
+        <div class="slide">
+            <h2>Who are you?</h2>
+            <div class="content-grid">
+                <div class="center-content">
+                    <img src="fig/icon.jpg" alt="Profile" class="small-img">
+                    <p><strong>Oikon</strong></p>
+                    <p>某外資IT企業, R&D, SW製品開発</p>
+                    <p>エンジニア歴6年</p>
+                    <p>趣味でツール弄りや個人開発してます</p>
+                    <p>Claude Codeの発信多め（Zenn, 𝕏のハイライト）</p>
+                </div>
+                <div class="center-content">
+                    <p><strong>𝕏:@gaishi_narou</strong></p>
+                    <img src="fig/icon_qr.png" alt="QR Code" class="small-img">
+                </div>
+            </div>
+        </div>
+
+        <!-- Claude Code歴 -->
+        <div class="slide">
+            <h2>Claude Code歴</h2>
+            <div class="content-single">
+                <div class="highlight">
+                    <p><strong>Anthropic推し</strong></p>
+                    <p>Claude 3.5から使用（ちょうど１年くらい）</p>
+                    <p>Claude Codeは3月に初使用</p>
+                    <p>Maxプラン開放後愛用（5/1~）</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 今回話すこと -->
+        <div class="slide">
+            <h2>今回話すこと</h2>
+            <div class="content-single">
+                <h3>対象: 初学者</h3>
+                <p>Claude Codeを使ってみたい・使い始めた方</p>
+                <h3>話す内容</h3>
+                <p>X のポスト "CLAUDE CODE 10x productivity workflow" のアレンジ</p>
+                <ul>
+                    <li>1. IDE(VSCode, Cursor)統合</li>
+                    <li>2. Planモード (Shift + Tab 2回)</li>
+                    <li>3. CLAUDE.mdのメンテナンス</li>
+                    <li>4. <code>/clear</code>によるコンテキストの浄化</li>
+                    <li>5. <code>Think</code>の拡張</li>
+                    <li>6. <code>permissions</code>の設定</li>
+                    <li>7. 最新知識・ドキュメントのInput</li>
+                    <li>8. Task (subagent) の活用</li>
+                    <li>9. +α: Hooksの活用</li>
+                </ul>
+                <img src="fig/ss 2025-07-03 23.38.06.png" alt="Original X Post">
+            </div>
+        </div>
+
+        <!-- 1: IDE統合 -->
+        <div class="slide">
+            <h2>1: IDE（VSCode, Cursor）統合</h2>
+            <div class="content-grid">
+                <div>
+                    <p>Claude Codeユーザーの多くはIDE統合して使用</p>
+                    <h3>メリット:</h3>
+                    <ul>
+                        <li>慣れているエディタが使える</li>
+                        <li>変更履歴が見やすい</li>
+                        <li>Cursor, GitHub copilotとの併用</li>
+                    </ul>
+                    <div class="highlight">
+                        <p>Claude CodeはCLIツールとしても活用できるが、まずはIDEで試すのがおすすめ</p>
+                        <p>個人的には動作が軽いVSCodeを使用している</p>
+                    </div>
+                </div>
+                <div class="center-content">
+                    <img src="fig/ide.jpeg" alt="IDE Integration">
+                </div>
+            </div>
+        </div>
+
+        <!-- 2: Planモード -->
+        <div class="slide">
+            <h2>2: Plan モード (Shift + Tab 2 回)</h2>
+            <div class="content-single">
+                <p>Claude Codeのタスク実行前にプラン立ててくれる</p>
+                <h3>メリット:</h3>
+                <ul>
+                    <li>いきなり実行しない</li>
+                    <li>必要であればプラン修正可能</li>
+                </ul>
+                <div class="highlight">
+                    <p>ワンショットのプロンプトエンジニアリングは手戻りも多い</p>
+                    <p>コンテキストを大事にする観点でも Plan モードを実行推奨</p>
+                </div>
+                <p>（余談）settings.json で起動時のデフォルトを Plan モードにできる</p>
+                <div class="code-block">
+<span class="json-bracket">{</span>
+  <span class="json-key">"permissions"</span><span class="json-punctuation">:</span> <span class="json-bracket">{</span>
+    <span class="json-key">"defaltMode"</span><span class="json-punctuation">:</span> <span class="json-string">"plan"</span> <span style="color: #6b7280;">// "acceptEdits" | "bypassPermissions"</span>
+  <span class="json-bracket">}</span>
+<span class="json-bracket">}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3: CLAUDE.md -->
+        <div class="slide">
+            <h2>3: CLAUDE.md のメンテナンス</h2>
+            <div class="content-single">
+                <p>Claude Code 起動時に読み込まれるドキュメント</p>
+                <p>Claude Code の守って欲しいルールを記載する（強制力はないので注意）</p>
+                <h3>ポイント:</h3>
+                <ul>
+                    <li>プロジェクトの構造・機能を記載</li>
+                    <li>定期的に更新する（<code>/init</code>でも可能）</li>
+                    <li><code>#</code>で適宜新規の指示を追加</li>
+                </ul>
+                <div class="highlight">
+                    <p><strong>CLAUDE.mdは定期的にメンテナンスすることを推奨。</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4: /clear -->
+        <div class="slide">
+            <h2>4: <code>/clear</code>によるコンテキストの浄化</h2>
+            <div class="content-single">
+                <p>Claude Code が期待通りの動作をするためには、<strong>コンテキストウィンドウ</strong>（作業メモリ）をいかに大事にするかが重要。</p>
+                <p><strong>コンテキストウィンドウ = 200K</strong></p>
+                <h3>意識すること:</h3>
+                <ul>
+                    <li>余計なコンテキストは入れない</li>
+                    <li>具体的な指示で余計なファイルを読ませない</li>
+                    <li>関係のないタスクは別のセッションで行う</li>
+                </ul>
+                <div class="highlight">
+                    <p>タスクが終了したら、定期的な<code>/clear</code>をしてコンテキストウィンドウをクリーンにする</p>
+                    <p>（個人的には<code>/compact</code>をあまり信用していない。必要ならドキュメントに起こしてもらう方がいい）</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5: Think拡張 -->
+        <div class="slide">
+            <h2>5: <code>Think</code>の拡張</h2>
+            <div class="content-single">
+                <p>Claude Code には思考トークン予算（Thinking Token Budget）が存在する</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Language</th>
+                            <th>31999 tokens</th>
+                            <th>10,000 tokens</th>
+                            <th>4000 tokens</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>English</td>
+                            <td><strong>ultrathink</strong>, think harder</td>
+                            <td><strong>megathink</strong>, think hard</td>
+                            <td><strong>think</strong></td>
+                        </tr>
+                        <tr>
+                            <td>日本語</td>
+                            <td>深く考えて</td>
+                            <td>よく考えて</td>
+                            <td>考えて</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>環境変数<code>MAX_THINKING_TOKENS</code>の変更可能。常に<code>ultrathink</code>したい場合 -> 31999</p>
+                <div class="code-block">
+<span class="json-bracket">{</span>
+  <span class="json-key">"env"</span><span class="json-punctuation">:</span> <span class="json-bracket">{</span>
+    <span class="json-key">"MAX_THINKING_TOKENS"</span><span class="json-punctuation">:</span> <span class="json-string">"31999"</span> <span style="color: #6b7280;">// 1024 ~ 200000</span>
+  <span class="json-bracket">}</span>
+<span class="json-bracket">}</span>
+                </div>
+            </div>
+            <div class="slide-references">
+                <a href="https://docs.anthropic.com/en/docs/claude-code/settings" target="_blank">参考: Claude Code Settings</a> |
+                <a href="https://zenn.dev/fbbp/articles/7aa9a46518a609" target="_blank">参考: Zenn記事</a>
+            </div>
+        </div>
+
+        <!-- 6: permissions設定 -->
+        <div class="slide">
+            <h2>6: <code>permissions</code>の設定</h2>
+            <div class="content-grid">
+                <div>
+                    <p><code>permissions</code>はsettings.jsonで設定</p>
+                    <p><code>allow</code>と<code>deny</code>をそれぞれ設定できる。</p>
+                    <p><code>allow</code>はClaude Codeを使用中に逐次追加できるので、<code>deny</code>の設定をしておくことを推奨</p>
+                    <div class="highlight">
+                        <p><strong>注意：必ず守ってくれるという過信は厳禁。<code>rm -fr</code>はすり抜ける報告もあり。</strong></p>
+                    </div>
+                    <p><strong>settings.json (settings.local.json):</strong></p>
+                </div>
+                <div>
+                    <div class="code-block">
+<span class="json-bracket">{</span>
+  <span class="json-key">"permissions"</span><span class="json-punctuation">:</span> <span class="json-bracket">{</span>
+    <span class="json-key">"allow"</span><span class="json-punctuation">:</span> <span class="json-bracket">[</span>
+    <span class="json-bracket">]</span><span class="json-punctuation">,</span>
+    <span class="json-key">"deny"</span><span class="json-punctuation">:</span> <span class="json-bracket">[</span>
+      <span class="json-string">"Bash(sudo:*)"</span><span class="json-punctuation">,</span>
+      <span class="json-string">"Bash(rm:*)"</span><span class="json-punctuation">,</span>
+      <span class="json-string">"Bash(rm -rf:*)"</span><span class="json-punctuation">,</span>
+      <span class="json-string">"Bash(git push:*)"</span><span class="json-punctuation">,</span>
+      <span class="json-string">"Bash(git commit:*)"</span><span class="json-punctuation">,</span>
+      <span class="json-string">"Bash(git reset:*)"</span><span class="json-punctuation">,</span>
+      <span class="json-string">"Bash(git rebase:*)"</span><span class="json-punctuation">,</span>
+      <span class="json-string">"Read(.env.*)"</span><span class="json-punctuation">,</span>
+      <span class="json-string">"Read(id_rsa)"</span><span class="json-punctuation">,</span>
+      <span class="json-string">"Read(id_ed25519)"</span><span class="json-punctuation">,</span>
+      <span class="json-string">"Read(**/*token*)"</span><span class="json-punctuation">,</span>
+      <span class="json-string">"Read(**/*key*)"</span><span class="json-punctuation">,</span>
+      <span class="json-string">"Write(.env*)"</span><span class="json-punctuation">,</span>
+      <span class="json-string">"Write(**/secrets/**)"</span><span class="json-punctuation">,</span>
+      <span class="json-string">"Bash(curl:*)"</span><span class="json-punctuation">,</span>
+      <span class="json-string">"Bash(wget:*)"</span><span class="json-punctuation">,</span>
+      <span class="json-string">"Bash(nc:*)"</span><span class="json-punctuation">,</span>
+      <span class="json-string">"Bash(npm uninstall:*)"</span><span class="json-punctuation">,</span>
+      <span class="json-string">"Bash(npm remove:*)"</span><span class="json-punctuation">,</span>
+      <span class="json-string">"Bash(psql:*)"</span><span class="json-punctuation">,</span>
+      <span class="json-string">"Bash(mysql:*)"</span><span class="json-punctuation">,</span>
+      <span class="json-string">"Bash(mongod:*)"</span><span class="json-punctuation">,</span>
+      <span class="json-string">"mcp__supabase__execute_sql"</span>
+    <span class="json-bracket">]</span>
+  <span class="json-bracket">}</span>
+<span class="json-bracket">}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-references">
+                <a href="https://izanami.dev/post/d6f25eec-71aa-4746-8c0d-80c67a1459be" target="_blank">参考: izanami.dev</a> |
+                <a href="https://zenn.dev/watany/articles/df6f3b0d3af825" target="_blank">参考: Zenn記事</a>
+            </div>
+        </div>
+
+        <!-- 7: 最新知識Input -->
+        <div class="slide">
+            <h2>7: 最新知識・ドキュメントのInput</h2>
+            <div class="content-single">
+                <p>LLMは最新の知識を持っていないため、追加で知識を与えてあげる必要がある</p>
+                <h3>知識を追加する方法：</h3>
+                <ol>
+                    <li>pdf, mdなどドキュメントを直接与える</li>
+                    <li>最新情報をWebSearchで検索してもらう</li>
+                    <li>MCPサーバーを活用する（Context7, Brave-Search）</li>
+                </ol>
+                <div class="highlight">
+                    <p><strong>Context7：代表的なライブラリから最新情報を取得してくれる</strong></p>
+                </div>
+                <h3>導入方法:</h3>
+                <div class="code-block">
+<span style="color: #10b981;">claude</span> <span style="color: #3b82f6;">mcp</span> <span style="color: #8b5cf6;">add</span> <span style="color: #f59e0b;">context7</span> <span style="color: #ef4444;">-s</span> <span style="color: #06b6d4;">project</span> <span style="color: #84cc16;">--</span> <span style="color: #f97316;">npx</span> <span style="color: #ec4899;">-y</span> <span style="color: #6366f1;">@upstash/context7-mcp</span>
+                </div>
+                <p>-s : スコープ（user, project, local）</p>
+            </div>
+            <div class="slide-references">
+                <a href="https://zenn.dev/karaage0703/articles/3bd2957807f311" target="_blank">参考: Claude Code にコマンド一発で MCP サーバを簡単設定</a>
+            </div>
+        </div>
+
+        <!-- 8: Task活用 -->
+        <div class="slide">
+            <h2>8: Task (subagent) の活用</h2>
+            <div class="content-grid">
+                <div>
+                    <p>Claude Codeの<strong>Task</strong>はSubagentが実行している</p>
+                    <ul>
+                        <li>軽量</li>
+                        <li>並列起動可能</li>
+                        <li>親agentで使用可能なツールを使える</li>
+                        <li>subagentは独自のContext Windowを持つ</li>
+                        <li>単独のタスクで動作し完了すると解放される</li>
+                    </ul>
+                    <div class="highlight">
+                        <p><strong>単発タスクは積極的にSubagentに任せることがおすすめ</strong></p>
+                    </div>
+                </div>
+                <div class="center-content">
+                    <img src="fig/subagents.png" alt="Subagents">
+                </div>
+            </div>
+        </div>
+
+        <!-- 9: Hooks活用 -->
+        <div class="slide">
+            <h2>+α: Hooks の活用</h2>
+            <div class="content-grid">
+                <div>
+                    <p><strong>7月1日に追加された新機能！</strong></p>
+                    <p>Claude Codeのアクションを検知して、事前に決められた動作を、指定のタイミングで行う機能。</p>
+                    <h3>導入のメリット:</h3>
+                    <ul>
+                        <li>必ず実行してくれる（=ルールを守らせる）</li>
+                        <li>コンテキストサイズの縮小</li>
+                        <li>拡張性の向上</li>
+                    </ul>
+                    <h3>すぐ導入できる例：</h3>
+                    <div class="code-block">
+<span style="color: #10b981;">afplay</span> <span style="color: #fbbf24;">/System/Library/Sounds/Sosumi.aiff</span>
+                    </div>
+                </div>
+                <div class="center-content">
+                    <img src="fig/hooks.png" alt="Hooks">
+                </div>
+            </div>
+        </div>
+
+        <!-- さらに使いこなすためのキーワード -->
+        <div class="slide">
+            <h2>さらに使いこなすためのキーワードたち</h2>
+            <div class="content-single">
+                <ul>
+                    <li>Slash Command</li>
+                    <li>カスタム Slash Command</li>
+                    <li>MCP サーバーの追加: Figma, Playwright, Context7, etc.</li>
+                    <li>Git Worktree</li>
+                    <li><code>--dengerously-skip-permissions</code></li>
+                    <li>CodeRabbit + <code>/pr-comments</code></li>
+                    <li>音声入力（Aqua Voice）</li>
+                    <li>著名なエンジニアによるコンテキストの明示（t_wada, Kent Beck, Fowler...）</li>
+                    <li>ccusage</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- おすすめ資料 -->
+        <div class="slide">
+            <h2>おすすめ資料</h2>
+            <div class="content-single reference-text">
+                <ul>
+                    <li>Anthropic - Claude の紹介: https://docs.anthropic.com/ja/docs/welcome</li>
+                    <li>Anthropic - Claude Code: Best practices for agentic coding: https://www.anthropic.com/engineering/claude-code-best-practices</li>
+                    <li>spiess.dev - How I Use Claude Code: https://spiess.dev/blog/how-i-use-claude-code</li>
+                    <li>Claude Code: Best Practices and Pro Tips: https://htdocs.dev/posts/claude-code-best-practices-and-pro-tips/</li>
+                    <li>ClaudeLog: https://claudelog.com/</li>
+                    <li>Claude Code を初めて使う人向けの実践ガイド: https://zenn.dev/hokuto_tech/articles/86d1edb33da61a</li>
+                    <li>Claude Code 逆引きコマンド事典: https://zenn.dev/ml_bear/articles/84e92429698177</li>
+                    <li>claude_code_deep_dive: https://www.youtube.com/live/HqXg2vfGX3c</li>
+                    <li>Claude Code にコマンド一発で MCP サーバを簡単設定: https://zenn.dev/karaage0703/articles/3bd2957807f311</li>
+                    <li>awesome-claude-code: https://github.com/hesreallyhim/awesome-claude-code</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- スライドカウンター -->
+    <div class="slide-counter">
+        <span id="slideCounter">1 / 14</span>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            
+            // Update counter
+            document.getElementById('slideCounter').textContent = `${currentSlide + 1} / ${totalSlides}`;
+            
+        }
+
+        function changeSlide(n) {
+            if (currentSlide + n >= 0 && currentSlide + n < totalSlides) {
+                showSlide(currentSlide + n);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') {
+                changeSlide(-1);
+            } else if (event.key === 'ArrowRight') {
+                changeSlide(1);
+            } else if (event.key === ' ') {
+                event.preventDefault();
+                changeSlide(1);
+            }
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>
