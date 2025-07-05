@@ -1,4 +1,4 @@
-title: "【初学者向け】 今すぐできる！ Claude Codeの生産性を10倍上げるTips"
+title: "初学者でも今すぐできる、Claude Codeの生産性を10倍上げるTips"
 author: "Oikon"
 date: "2025/07/05"
 subtitle: "Claude Code 初学者 勉強会 2"
@@ -8,32 +8,33 @@ slides:
     content:
       - image: "fig/icon.jpg"
       - text: "Oikon"
-      - text: "某外資IT企業, R&D, SW製品開発"
+      - text: "外資IT企業, R&D, 開発"
       - text: "エンジニア歴6年"
       - text: "趣味でツール弄りや個人開発してます"
-      - text: "Claude Codeの発信多め（Zenn, 𝕏のハイライト）"
-      - text: "𝕏:@gaishi_narou"
+      - text: "最近はClaude Codeの発信多め（Zenn, 𝕏のハイライト）"
+      - text: "𝕏: @gaishi_narou"
       - image: "fig/icon_qr.png"
       - image: "fig/zenn.png"
 
   - title: "Claude Code歴"
     content:
+      - text: "Claude Code:"
       - text: "- Anthropic推し"
       - text: "- Claude 3.5から使用（ちょうど１年くらい）"
       - text: "- Claude Codeは3月に初使用"
       - text: "- Maxプラン開放後愛用（5/1~）"
       - subtitle: "主な使い方:"
       - text: "- ツール作成"
-      - text: "- OSSなどコード分析"
       - text: "- 趣味の開発"
+      - text: "- OSSなどコード分析"
       - text: "- LTスライド作成 (new)"
 
   - title: "今回話すこと"
     content:
-      - subtitle: "対象: 初学者"
+      - subtitle: "対象: Claude Code初学者"
       - text: "Claude Codeを使ってみたい・使い始めた方"
       - subtitle: "話す内容"
-      - text: "X の \"CLAUDE CODE 10x productivity workflow\" のアレンジ"
+      - text: "X の "CLAUDE CODE 10x productivity workflow" のアレンジ。10分くらいで試せるTips"
       - text: "1. IDE(VSCode, Cursor)統合"
       - text: "2. Planモード (Shift + Tab 2回)"
       - text: "3. CLAUDE.mdのメンテナンス"
@@ -48,11 +49,13 @@ slides:
   - title: "1: IDE（VSCode, Cursor）統合"
     content:
       - text: "Claude Codeユーザーの多くはIDE統合して使用"
+      - text: "CLIツールが苦手な人におすすめ"
       - subtitle: "メリット:"
       - text: "- 変更履歴が見やすい"
       - text: "- 慣れているエディタが使える"
       - text: "- Cursor, GitHub copilotとの併用"
-      - text: "Claude CodeはCLIツールとしても活用できるが、まずはIDEで試すのがおすすめ"
+      - text: "Claude CodeはCLIツールとしても活用できるが、"
+      - text: "まずはIDEで試すのがおすすめ"
       - text: "個人的には動作が軽いVSCodeを使用している"
       - image: "fig/ide.jpeg"
 
@@ -60,10 +63,10 @@ slides:
     content:
       - text: "Claude Codeのタスク実行前にプラン立ててくれる"
       - subtitle: "メリット:"
-      - text: "- いきなり実行しない"
+      - text: "- いきなり走り始めない"
       - text: "- 必要であればプラン修正可能"
       - text: "ワンショットのプロンプトエンジニアリングは手戻りも多い"
-      - text: "コンテキストを大事にする観点でも Plan モードを実行推奨"
+      - text: "コンテキストを大事にする観点でも、Planモードを実行推奨"
       - text: "（余談）settings.json で起動時のデフォルトを Plan モードにできる"
       - code: |
           {
@@ -75,24 +78,27 @@ slides:
 
   - title: "3: CLAUDE.md のメンテナンス"
     content:
-      - text: "Claude Code 起動時に読み込まれるドキュメント"
+      - text: "CLAUDE.mdは、Claude Code起動時に読み込まれるドキュメント"
       - text: "Claude Code の守って欲しいルールを記載する（強制力はないので注意）"
       - subtitle: "ポイント:"
       - text: "- プロジェクトの構造・機能を記載"
       - text: "- 定期的に更新する（`/init`でも可能）"
       - text: "- `#`で適宜新規の指示を追加"
-      - text: "CLAUDE.mdは定期的にメンテナンスすることを推奨"
+      - text: "CLAUDE.mdは定期的にメンテナンスすることを推奨。"
+      - text: "Anthropic公式のGitHubリポジトリやawesome-claude-codeのCLAUDE.mdを参考にすると良い。"
+      - text: "(ref)"
+      - text: "https://github.com/anthropics"
+      - text: "https://github.com/hesreallyhim/awesome-claude-code"
 
   - title: "4: `/clear`によるコンテキストの浄化"
     content:
-      - text: "Claude Code が期待通りの動作をするためには、**コンテキストウィンドウ**（作業メモリ）をいかに大事にするかが重要。"
-      - text: "コンテキストウィンドウ = 200K"
+      - text: "Claude Code が期待通りの動作をするためには、**コンテキストウィンドウ**（作業メモリ, 200K）をいかに大事にするかが重要。"
       - subtitle: "意識すること:"
       - text: "- 余計なコンテキストは入れない"
       - text: "- 具体的な指示。余計なファイルを読ませない"
-      - text: "- 関係のないタスクは、別のセッションで行う"
+      - text: "- 関係のないタスクは、別のセッションで行う(`/clear`する)"
       - text: "タスクが終了したら定期的に`/clear`をして、コンテキストウィンドウをクリーンにする"
-      - text: "（個人的には`/compact`をあまり信用していない。必要ならドキュメントに起こしてもらう方がいい）"
+      - text: "（個人的には`/compact`をあまり信用していない。必要ならClaudeにドキュメントに起こしてもらう方がいい）"
 
   - title: "5: `Think`の拡張"
     content:
@@ -112,16 +118,18 @@ slides:
               }
           }
         language: "json"
+      - text: "(ref)"
+      - text: "https://docs.anthropic.com/en/docs/claude-code/settings"
+      - text: "https://zenn.dev/fbbp/articles/7aa9a46518a609"
+      - text: "https://zenn.dev/oikon/articles/0281640eae5aed"
 
   - title: "6: `permissions`の設定"
     content:
       - text: "`permissions`はsettings.jsonで設定"
       - text: "`allow`と`deny`をそれぞれ設定できる。"
       - text: "`allow`はClaude Codeを使用中に逐次追加できるので、`deny`の設定をしておくことを推奨"
-      - text: "注意：必ず守ってくれるという過信は厳禁。`rm -fr`はすり抜ける報告もあり。"
-
-  - title: "permissions設定例"
-    content:
+      - text: "注意：必ず守ってくれるという過信は厳禁。"
+      - text: "`rm -fr`はすり抜ける報告もあり。"
       - text: "settings.json (settings.local.json):"
       - code: |
           {
@@ -156,59 +164,79 @@ slides:
             }
           }
         language: "json"
+      - text: "[xより引用](https://izanami.dev/post/d6f25eec-71aa-4746-8c0d-80c67a1459be)"
+      - text: "(ref)"
+      - text: "https://izanami.dev/post/d6f25eec-71aa-4746-8c0d-80c67a1459be"
+      - text: "https://zenn.dev/watany/articles/df6f3b0d3af825"
 
   - title: "7: 最新知識・ドキュメントのInput"
     content:
-      - text: "LLMは最新の知識を持っていないため、追加で知識を与えてあげる必要がある"
+      - text: "Claude Codeは最新の知識を持っていないため、追加で知識を与えてあげる必要がある"
+      - text: "(Opus/Sonnetは2025年3月までの学習)"
       - subtitle: "知識を追加する方法："
       - text: "1. pdf, mdなどドキュメントを直接与える"
       - text: "2. 最新情報をWebSearchで検索してもらう"
       - text: "3. MCPサーバーを活用する（Context7, Brave-Searchなど）"
-      - subtitle: "すぐに導入して使いやすいContext7"
+      - subtitle: "すぐに導入して使いやすいのは[Context7](https://github.com/upstash/context7)"
       - text: "Context7：代表的なライブラリから最新情報を取得してくれる"
       - subtitle: "導入方法:"
       - code: "claude mcp add context7 -s project -- npx -y @upstash/context7-mcp"
         language: "sh"
       - text: "-s : スコープ（user, project, local）"
+      - text: "(ref)"
+      - text: "https://github.com/upstash/context7"
+      - text: "https://zenn.dev/karaage0703/articles/3bd2957807f311"
 
   - title: "8: Task (subagent) の活用"
     content:
-      - text: "Claude Codeの**Task**はSubagentが実行している"
+      - text: "Claude Codeの**Task**は、Subagentが実行している"
       - text: "- 軽量"
       - text: "- 並列起動可能"
-      - text: "- 親agentで使用可能なツールを使える"
       - text: "- subagentは独自のContext Windowを持つ"
       - text: "- 単独のタスクで動作し完了すると解放される"
-      - text: "単発タスクは積極的にSubagentに任せることがおすすめ"
+      - text: "- 親agentで使用可能なツール（MCPサーバーなど）を使える"
+      - subtitle: "使い方："
+      - text: "'use (multiple) subagents ...'"
+      - text: "簡単なタスクは積極的にSubagentに任せることがおすすめ"
       - image: "fig/subagents.png"
 
   - title: "+α: Hooks の活用"
     content:
       - text: "7月1日に追加された新機能！"
-      - text: "Claude Codeのアクションを検知して、事前に決められた動作を、指定のタイミングで行う機能。"
+      - text: "Claude Codeのアクションを検知して、事前に決められた動作を、"
+      - text: "指定のタイミングで行う機能。"
       - subtitle: "導入のメリット:"
       - text: "- 必ず実行してくれる（=ルールを守らせる）"
       - text: "- コンテキストサイズの縮小"
       - text: "- 拡張性の向上"
-      - subtitle: "すぐ導入できる例："
+      - subtitle: "すぐ導入できる例：タスク完了時の通知オンを鳴らす"
+      - text: "`/Hooks`を実行して`Notification`か`Stop`に以下のコマンドを入れる"
       - code: "afplay /System/Library/Sounds/Sosumi.aiff"
         language: "sh"
+      - text: "shell scriptの実行もでき、拡張性がかなり高い！"
       - image: "fig/hooks.png"
+      - text: "(ref)"
+      - text: "https://zenn.dev/gotalab/articles/2fe8d7a15409c8"
 
   - title: "さらに使いこなすためのキーワードたち"
     content:
       - text: "- Slash Command"
       - text: "- カスタム Slash Command"
       - text: "- MCP サーバーの追加: Figma, Playwright, Context7, etc."
-      - text: "- Slash Command"
-      - text: "- カスタム Slash Command"
-      - text: "- MCP サーバーの追加: Figma, Playwright, Context7, etc."
       - text: "- [Git Worktree] (https://docs.anthropic.com/en/docs/claude-code/common-workflows#run-parallel-claude-code-sessions-with-git-worktrees)"
-      - text: "- `--dengerously-skip-permissions`"
+      - text: "- `--dangerously-skip-permissions`"
       - text: "- CodeRabbit + `/pr-comments`"
       - text: "- 音声入力（Aqua Voice）"
       - text: "- 著名なエンジニアによるコンテキストの明示（t_wada, Kent Beck, Fowler...）"
       - text: "- [ccusage](https://zenn.dev/ryoppippi/articles/6c9a8fe6629cd6)"
+
+  - title: "まとめ"
+    content:
+      - text: "- Claude CodeはCLIツールゆえにできることが多い（というか多すぎる）"
+      - text: "- 全部の機能を熟知する必要はない。まずは使える機能を試すと良い"
+      - text: "- Pro, Maxプランなら定額なので、色々試しまくる！"
+      - text: "- いい活用例があったら積極的に共有してください！"
+      - image: "fig/icon.jpg"
 
   - title: "おすすめ資料"
     content:

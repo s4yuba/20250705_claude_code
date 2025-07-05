@@ -2,7 +2,7 @@
 
 ## 手順
 
-- step1: mdの変更を検知
+- step1: mdの変更をyamlと比較して検知。
 - step2: mdをyamlに変換（なければyamlを作成）
 - step3: 既存のartifacts/slides.htmlをmdとyamlを参考に更新
 - step4: スライドPDFをscript/html-to-pdf.jsで生成

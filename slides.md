@@ -151,9 +151,6 @@ settings.json (settings.local.json):
 }
 ```
 
-![think-zenn](fig/think.png)
-今日投稿しました↑
-
 (ref)
 <https://docs.anthropic.com/en/docs/claude-code/settings>
 <https://zenn.dev/fbbp/articles/7aa9a46518a609>
