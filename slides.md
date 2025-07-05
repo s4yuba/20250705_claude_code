@@ -139,7 +139,7 @@ Claude Code には思考トークン予算（Thinking Token Budget）が存在�
 | 日本語   | 深く考えて               | よく考えて            | 考えて |
 
 環境変数`MAX_THINKING_TOKENS`の変更可能。
-常に`ultrathink`したい場合 -> 31999
+思考モード時に常に`ultrathink`したい場合 -> 31999
 
 settings.json (settings.local.json):
 
