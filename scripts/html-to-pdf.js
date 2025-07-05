@@ -83,23 +83,50 @@ async function convertHtmlToPdf(htmlFile, outputPdf) {
             max-height: 1080px !important;
             min-width: 1920px !important;
             min-height: 1080px !important;
+            box-shadow: none !important;
           }
           
           .slide:last-child {
             page-break-after: auto !important;
           }
           
-          /* タイトルのz-indexを調整 */
+          /* タイトルのスタイルを維持 */
           .slide h2 {
-            position: absolute !important;
-            z-index: 10 !important;
+            margin-bottom: 2rem !important;
+          }
+          
+          /* スライドカウンターを非表示 */
+          .slide-counter {
+            display: none !important;
+          }
+          
+          /* 各スライドのページ番号 */
+          .slide-page-number {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            background-color: rgba(212, 163, 127, 0.8);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 1rem;
+            z-index: 1000;
           }
         }
       `;
       document.head.appendChild(style);
       
-      // すべてのスライドを表示
-      document.querySelectorAll('.slide').forEach((slide, index) => {
+      // グローバルのスライドカウンターを非表示に
+      const globalCounter = document.querySelector('.slide-counter');
+      if (globalCounter) {
+        globalCounter.style.display = 'none';
+      }
+      
+      // すべてのスライドを表示し、各スライドにページ番号を追加
+      const slides = document.querySelectorAll('.slide');
+      const totalSlides = slides.length;
+      
+      slides.forEach((slide, index) => {
         slide.classList.add('active');
         slide.style.display = 'flex';
         slide.style.position = 'relative';
@@ -112,6 +139,13 @@ async function convertHtmlToPdf(htmlFile, outputPdf) {
         slide.style.pageBreakAfter = 'always';
         slide.style.margin = '0';
         slide.style.boxSizing = 'border-box';
+        slide.style.boxShadow = 'none';
+        
+        // 各スライドにページ番号を追加
+        const pageNumber = document.createElement('div');
+        pageNumber.className = 'slide-page-number';
+        pageNumber.textContent = `${index + 1} / ${totalSlides}`;
+        slide.appendChild(pageNumber);
       });
       
       // プレゼンテーションコンテナのスタイルを調整
