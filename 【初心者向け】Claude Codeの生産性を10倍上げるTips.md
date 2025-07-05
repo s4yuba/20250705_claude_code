@@ -1,4 +1,4 @@
-# 初学者でも今すぐできる、Claude Codeの生産性を10倍にするTips
+# 【初学者向け】 今すぐできる！ Claude Codeの生産性を10倍上げるTips
 
 Oikon
 
@@ -20,12 +20,20 @@ Claude Codeの発信多め（Zenn, 𝕏のハイライト）
 𝕏:@gaishi_narou
 ![x_qr](fig/icon_qr.png)
 
+![zenn](fig/zenn.png)
+
 ## Claude Code歴
 
-Anthropic推し
-Claude 3.5から使用（ちょうど１年くらい）
-Claude Codeは3月に初使用
-Maxプラン開放後愛用（5/1~）
+- Anthropic推し
+- Claude 3.5から使用（ちょうど１年くらい）
+- Claude Codeは3月に初使用
+- Maxプラン開放後愛用（5/1~）
+
+主な使い方:
+- ツール作成
+- OSSなどコード分析
+- 趣味の開発
+- LTスライド作成 (new)
 
 ## 今回話すこと
 
@@ -35,7 +43,7 @@ Claude Codeを使ってみたい・使い始めた方
 
 ### 話す内容
 
-X のポスト "CLAUDE CODE 10x productivity workflow" のアレンジ
+X の "CLAUDE CODE 10x productivity workflow" のアレンジ
 
 1. IDE(VSCode, Cursor)統合
 2. Planモード (Shift + Tab 2回)
@@ -55,8 +63,8 @@ Claude Codeユーザーの多くはIDE統合して使用
 
 メリット:
 
-- 慣れているエディタが使える
 - 変更履歴が見やすい
+- 慣れているエディタが使える
 - Cursor, GitHub copilotとの併用
 
 Claude CodeはCLIツールとしても活用できるが、まずはIDEで試すのがおすすめ
@@ -97,7 +105,7 @@ Claude Code の守って欲しいルールを記載する（強制力はない�
 - 定期的に更新する（`/init`でも可能）
 - `#`で適宜新規の指示を追加
 
-CLAUDE.mdは定期的にメンテナンスすることを推奨。
+CLAUDE.mdは定期的にメンテナンスすることを推奨
 
 ## 4: `/clear`によるコンテキストの浄化
 
@@ -107,10 +115,10 @@ Claude Code が期待通りの動作をするためには、**コンテキスト
 意識すること:
 
 - 余計なコンテキストは入れない
-- 具体的な指示で余計なファイルを読ませない
-- 関係のないタスクは別のセッションで行う
+- 具体的な指示。余計なファイルを読ませない
+- 関係のないタスクは、別のセッションで行う
 
-タスクが終了したら、定期的な`/clear`をしてコンテキストウィンドウをクリーンにする
+タスクが終了したら定期的に`/clear`をして、コンテキストウィンドウをクリーンにする
 
 （個人的には`/compact`をあまり信用していない。必要ならドキュメントに起こしてもらう方がいい）
 
@@ -149,6 +157,7 @@ settings.json (settings.local.json):
 
 注意：必ず守ってくれるという過信は厳禁。`rm -fr`はすり抜ける報告もあり。
 
+settings.json (settings.local.json):
 ```json
 {
   "permissions": {
@@ -182,7 +191,6 @@ settings.json (settings.local.json):
   },
 }
 ```
-(引用元: <https://zenn.dev/watany/articles/df6f3b0d3af825>)
 
 (ref)
 <https://izanami.dev/post/d6f25eec-71aa-4746-8c0d-80c67a1459be>
@@ -195,7 +203,9 @@ LLMは最新の知識を持っていないため、追加で知識を与えて�
 知識を追加する方法：
 1. pdf, mdなどドキュメントを直接与える
 2. 最新情報をWebSearchで検索してもらう
-3. MCPサーバーを活用する（Context7, Brave-Search）
+3. MCPサーバーを活用する（Context7, Brave-Searchなど）
+
+すぐに導入して使いやすいContext7
 
 Context7：代表的なライブラリから最新情報を取得してくれる
 
@@ -236,8 +246,6 @@ Claude Codeのアクションを検知して、事前に決められた動作を
 - 拡張性の向上
 
 すぐ導入できる例：
-
-**タスク終了時に音を鳴らしてくれる**
 
 ```sh
 afplay /System/Library/Sounds/Sosumi.aiff
