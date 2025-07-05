@@ -78,7 +78,7 @@ slides:
 
   - title: "3: CLAUDE.md のメンテナンス"
     content:
-      - text: "CLAUDE.mdは、Claude Code起動時に読み込まれるドキュメント"
+      - text: "CLAUDE.md(CLAUDE.local.md)は、Claude Code起動時に読み込まれるドキュメント"
       - text: "Claude Code の守って欲しいルールを記載する（強制力はないので注意）"
       - subtitle: "ポイント:"
       - text: "- プロジェクトの構造・機能を記載"
@@ -222,13 +222,14 @@ slides:
     content:
       - text: "- Slash Command"
       - text: "- カスタム Slash Command"
-      - text: "- MCP サーバーの追加: Figma, Playwright, Context7, etc."
-      - text: "- [Git Worktree] (https://docs.anthropic.com/en/docs/claude-code/common-workflows#run-parallel-claude-code-sessions-with-git-worktrees)"
+      - text: "- MCP サーバーの追加"
+      - text: "- ヘッドレスモード(claude -p \"prompt\")"
+      - text: "- Git Worktree"
       - text: "- `--dangerously-skip-permissions`"
       - text: "- CodeRabbit + `/pr-comments`"
       - text: "- 音声入力（Aqua Voice）"
       - text: "- 著名なエンジニアによるコンテキストの明示（t_wada, Kent Beck, Fowler...）"
-      - text: "- [ccusage](https://zenn.dev/ryoppippi/articles/6c9a8fe6629cd6)"
+      - text: "- ccusage"
 
   - title: "まとめ"
     content:

@@ -99,7 +99,7 @@ Claude Codeのタスク実行前にプラン立ててくれる
 
 ## 3: CLAUDE.md のメンテナンス
 
-CLAUDE.mdは、Claude Code起動時に読み込まれるドキュメント
+CLAUDE.md(CLAUDE.local.md)は、Claude Code起動時に読み込まれるドキュメント
 Claude Code の守って欲しいルールを記載する（強制力はないので注意）
 
 ポイント:
@@ -200,6 +200,7 @@ settings.json (settings.local.json):
   },
 }
 ```
+
 [xより引用](<https://izanami.dev/post/d6f25eec-71aa-4746-8c0d-80c67a1459be>)
 
 (ref)
@@ -279,13 +280,14 @@ shell scriptの実行もでき、拡張性がかなり高い！
 
 - Slash Command
 - カスタム Slash Command
-- MCP サーバーの追加: Figma, Playwright, Context7, etc.
-- [Git Worktree] (https://docs.anthropic.com/en/docs/claude-code/common-workflows#run-parallel-claude-code-sessions-with-git-worktrees)
+- MCP サーバーの追加
+- ヘッドレスモード(claude -p "prompt")
+- Git Worktree
 - `--dangerously-skip-permissions`
 - CodeRabbit + `/pr-comments`
 - 音声入力（Aqua Voice）
 - 著名なエンジニアによるコンテキストの明示（t_wada, Kent Beck, Fowler...）
-- [ccusage](https://zenn.dev/ryoppippi/articles/6c9a8fe6629cd6)
+- ccusage
 
 ## まとめ
 
