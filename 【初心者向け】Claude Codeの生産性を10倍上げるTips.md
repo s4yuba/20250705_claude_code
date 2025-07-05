@@ -44,8 +44,7 @@ Claude Codeを使ってみたい・使い始めた方
 
 ### 話す内容
 
-X の "CLAUDE CODE 10x productivity workflow" のアレンジ
-10分くらいで試せるTips
+X の "CLAUDE CODE 10x productivity workflow" のアレンジ。10分くらいで試せるTips
 
 1. IDE(VSCode, Cursor)統合
 2. Planモード (Shift + Tab 2回)
@@ -285,7 +284,7 @@ shell scriptの実行もでき、拡張性がかなり高い！
 - カスタム Slash Command
 - MCP サーバーの追加: Figma, Playwright, Context7, etc.
 - [Git Worktree] (https://docs.anthropic.com/en/docs/claude-code/common-workflows#run-parallel-claude-code-sessions-with-git-worktrees)
-- `--dengerously-skip-permissions`
+- `--dangerously-skip-permissions`
 - CodeRabbit + `/pr-comments`
 - 音声入力（Aqua Voice）
 - 著名なエンジニアによるコンテキストの明示（t_wada, Kent Beck, Fowler...）
