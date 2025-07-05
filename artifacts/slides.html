@@ -271,7 +271,7 @@
             <h2>Who are you?</h2>
             <div class="content-grid">
                 <div class="center-content">
-                    <img src="fig/icon.jpg" alt="Profile" class="small-img">
+                    <img src="../fig/icon.jpg" alt="Profile" class="small-img">
                     <p><strong>Oikon</strong></p>
                     <p>某外資IT企業, R&D, SW製品開発</p>
                     <p>エンジニア歴6年</p>
@@ -280,8 +280,8 @@
                 </div>
                 <div class="center-content">
                     <p><strong>𝕏:@gaishi_narou</strong></p>
-                    <img src="fig/icon_qr.png" alt="QR Code" class="small-img">
-                    <img src="fig/zenn.png" alt="Zenn" class="small-img" style="max-height: 500px;">
+                    <img src="../fig/icon_qr.png" alt="QR Code" class="small-img">
+                    <img src="../fig/zenn.png" alt="Zenn" style="max-height: 500px;">
                 </div>
             </div>
         </div>
@@ -314,7 +314,7 @@
                     <h3>対象: 初学者</h3>
                     <p>Claude Codeを使ってみたい・使い始めた方</p>
                     <div style="display: flex; justify-content: center; margin-top: 0.5rem;">
-                        <img src="fig/ss 2025-07-03 23.38.06.png" alt="Original X Post" style="max-height: 620px;">
+                        <img src="../fig/ss 2025-07-03 23.38.06.png" alt="Original X Post" style="max-height: 620px;">
                     </div>
                 </div>
                 <div>
@@ -353,7 +353,7 @@
                     </div>
                 </div>
                 <div class="center-content">
-                    <img src="fig/ide.jpeg" alt="IDE Integration">
+                    <img src="../fig/ide.jpeg" alt="IDE Integration">
                 </div>
             </div>
         </div>
@@ -522,23 +522,23 @@
         <!-- 7: 最新知識Input -->
         <div class="slide">
             <h2>7: 最新知識・ドキュメントのInput</h2>
-            <div class="content-single">
-                <p>LLMは最新の知識を持っていないため、追加で知識を与えてあげる必要がある</p>
-                <h3>知識を追加する方法：</h3>
-                <ol>
-                    <li>pdf, mdなどドキュメントを直接与える</li>
-                    <li>最新情報をWebSearchで検索してもらう</li>
-                    <li>MCPサーバーを活用する（Context7, Brave-Searchなど）</li>
+            <div class="content-single" style="padding-bottom: 80px;">
+                <p style="margin-bottom: 0.5rem;">LLMは最新の知識を持っていないため、追加で知識を与えてあげる必要がある</p>
+                <h3 style="margin-top: 1rem; margin-bottom: 0.5rem;">知識を追加する方法：</h3>
+                <ol style="margin-bottom: 1rem;">
+                    <li style="margin-bottom: 0.3rem;">pdf, mdなどドキュメントを直接与える</li>
+                    <li style="margin-bottom: 0.3rem;">最新情報をWebSearchで検索してもらう</li>
+                    <li style="margin-bottom: 0.3rem;">MCPサーバーを活用する（Context7, Brave-Searchなど）</li>
                 </ol>
-                <h3>すぐに導入して使いやすいContext7</h3>
-                <div class="highlight">
-                    <p><strong>Context7：代表的なライブラリから最新情報を取得してくれる</strong></p>
+                <h3 style="margin-top: 1rem; margin-bottom: 0.5rem;">すぐに導入して使いやすいContext7</h3>
+                <div class="highlight" style="margin-bottom: 0.5rem; padding: 0.5rem;">
+                    <p style="margin: 0;"><strong>Context7：代表的なライブラリから最新情報を取得してくれる</strong></p>
                 </div>
-                <h3>導入方法:</h3>
-                <div class="code-block">
-<span style="color: #10b981;">claude</span> <span style="color: #3b82f6;">mcp</span> <span style="color: #8b5cf6;">add</span> <span style="color: #f59e0b;">context7</span> <span style="color: #ef4444;">-s</span> <span style="color: #06b6d4;">project</span> <span style="color: #84cc16;">--</span> <span style="color: #f97316;">npx</span> <span style="color: #ec4899;">-y</span> <span style="color: #6366f1;">@upstash/context7-mcp</span>
+                <h3 style="margin-top: 0.5rem; margin-bottom: 0.5rem;">導入方法:</h3>
+                <div class="code-block" style="margin-bottom: 0.5rem;">
+claude mcp add context7 -s project -- npx -y @upstash/context7-mcp
                 </div>
-                <p>-s : スコープ（user, project, local）</p>
+                <p style="margin-top: 0.5rem; margin-bottom: 0;">-s : スコープ（user, project, local）</p>
             </div>
             <div class="slide-references">
                 <a href="https://zenn.dev/karaage0703/articles/3bd2957807f311" target="_blank">参考: Claude Code にコマンド一発で MCP サーバを簡単設定</a>
@@ -563,7 +563,7 @@
                     </div>
                 </div>
                 <div class="center-content">
-                    <img src="fig/subagents.png" alt="Subagents" style="max-height: 650px;">
+                    <img src="../fig/subagents.png" alt="Subagents" style="max-height: 650px;">
                 </div>
             </div>
         </div>
@@ -587,7 +587,7 @@
                     </div>
                 </div>
                 <div class="center-content">
-                    <img src="fig/hooks.png" alt="Hooks">
+                    <img src="../fig/hooks.png" alt="Hooks">
                 </div>
             </div>
         </div>
