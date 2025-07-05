@@ -222,7 +222,8 @@ slides:
     content:
       - text: "- Slash Command"
       - text: "- カスタム Slash Command"
-      - text: "- MCP サーバーの追加"
+      - text: "- Hooks JSON Output"
+      - text: "- MCPサーバー"
       - text: "- ヘッドレスモード(claude -p \"prompt\")"
       - text: "- Git Worktree"
       - text: "- `--dangerously-skip-permissions`"

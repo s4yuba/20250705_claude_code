@@ -280,7 +280,8 @@ shell scriptの実行もでき、拡張性がかなり高い！
 
 - Slash Command
 - カスタム Slash Command
-- MCP サーバーの追加
+- Hooks JSON Output
+- MCPサーバー
 - ヘッドレスモード(claude -p "prompt")
 - Git Worktree
 - `--dangerously-skip-permissions`

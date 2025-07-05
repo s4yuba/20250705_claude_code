@@ -96,6 +96,13 @@
             margin-bottom: 1rem;
             color: #000000;
         }
+        
+        /* まとめスライドの特別なスタイル */
+        .summary-list li {
+            font-size: 2rem !important;
+            line-height: 2.2 !important;
+            margin-bottom: 1.5rem !important;
+        }
 
         .slide ul {
             margin-left: 2rem;
@@ -636,7 +643,8 @@ claude mcp add context7 -s project -- npx -y @upstash/context7-mcp
                 <ul>
                     <li>Slash Command</li>
                     <li>カスタム Slash Command</li>
-                    <li>MCP サーバーの追加</li>
+                    <li>Hooks JSON Output</li>
+                    <li>MCPサーバー</li>
                     <li>ヘッドレスモード(claude -p "prompt")</li>
                     <li>Git Worktree</li>
                     <li><code>--dangerously-skip-permissions</code></li>
@@ -652,7 +660,7 @@ claude mcp add context7 -s project -- npx -y @upstash/context7-mcp
         <div class="slide">
             <h2>まとめ</h2>
             <div class="content-single">
-                <ul style="font-size: 4rem;">
+                <ul class="summary-list">
                     <li>Claude CodeはCLIツールゆえにできることが多い（というか多すぎる）</li>
                     <li>全部の機能を熟知する必要はない。まずは使える機能を試すと良い</li>
                     <li>Pro, Maxプランなら定額なので、色々試しまくる！</li>
